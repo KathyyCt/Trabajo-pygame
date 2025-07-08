@@ -72,6 +72,21 @@ except Exception as e:
     print(f"No se pudo cargar la música: {e}")
 
 def dibujar_boton(texto, x, y, ancho, alto, color, pantalla):
+    
+    """
+    La funcion dibuja un botón rectangular con texto centrado en la pantalla de Pygame.
+    Por parametros obtiene
+    texto (str): El texto que se mostrara en el boton.
+    x (int): Coordenada X de la esquina superior izquierda del boton.
+    y (int): Coordenada Y de la esquina superior izquierda del boton.
+    ancho (int): Ancho del boton.
+    alto (int): Alto del boton.
+    color (tuple): Color del boton en formato RGB.
+    pantalla (pygame.Surface): Superficie de la pantalla donde se dibujara el boton.
+
+    Retorna: Rectangulo del botón, util para detectar colisiones (clicks) (pygame.Rect).
+    """
+
     pygame.draw.rect(pantalla, color, (x, y, ancho, alto))
     texto_render = fuente.render(texto, True, BLANCO)
     rect_texto = texto_render.get_rect(center=(x + ancho // 2, y + alto // 2))
@@ -79,6 +94,16 @@ def dibujar_boton(texto, x, y, ancho, alto, color, pantalla):
     return pygame.Rect(x, y, ancho, alto)
 
 def iniciar_pregunta():
+
+    """
+    Selecciona aleatoriamente una nueva pregunta del conjunto disponible.
+    Esta función actualiza el estado del juego para mostrar una nueva
+    pregunta en pantalla. Si ya se han usado todas las preguntas, reinicia 
+    el indice de preguntas.
+    No tiene parametros.
+    No tiene retorno.
+    """
+        
     global posicion_pregunta, mostrar_pregunta, respuesta_seleccionada, mensaje_resultado, esperar_siguiente
     if not indice_preguntas:
         indice_preguntas.extend(range(len(preguntas)))
